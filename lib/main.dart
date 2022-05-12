@@ -3,8 +3,14 @@ import 'package:formvalidacion/src/blocs/provider.dart';
 import 'package:formvalidacion/src/pages/home_page.dart';
 import 'package:formvalidacion/src/pages/login_page.dart';
 import 'package:formvalidacion/src/pages/producto_page.dart';
+import 'package:formvalidacion/src/pages/registro_page.dart';
+import 'package:formvalidacion/src/preferencias_usuario/preferencias_usuario.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  final prefs = PreferenciasUsuario();
+  await prefs.initPrefs();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -13,9 +19,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
-        initialRoute: 'home',
+        initialRoute: 'login',
         routes: {
           'login': (BuildContext context) => LoginPage(),
+          'registro': (BuildContext context) => RegistroPage(),
           'home': (BuildContext context) => HomePage(),
           'producto': (BuildContext context) => ProductoPage(),
           'pruebaCod': (BuildContext context) => HomePage(),

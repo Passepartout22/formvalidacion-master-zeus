@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:formvalidacion/src/blocs/provider.dart';
 import 'package:formvalidacion/src/providers/usuario_provider.dart';
 
-class LoginPage extends StatelessWidget {
+class RegistroPage extends StatelessWidget {
   final usuarioProvider = UsuarioProvider();
 
   @override
@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                 ),
                 Text(
-                  'Usuario Zeus Cach',
+                  'Bienvenido Usuario',
                   style: TextStyle(color: Colors.white, fontSize: 25.0),
                 )
               ],
@@ -89,7 +89,7 @@ class LoginPage extends StatelessWidget {
                 ]),
             child: Column(children: <Widget>[
               Text(
-                'Ingreso',
+                'Crear Cuenta',
                 style: TextStyle(fontSize: 20.0),
               ),
               SizedBox(height: 60.0),
@@ -103,9 +103,8 @@ class LoginPage extends StatelessWidget {
             ]),
           ),
           TextButton(
-            child: Text('Crear una nueva cuenta'),
-            onPressed: () =>
-                Navigator.pushReplacementNamed(context, 'registro'),
+            child: Text('¿Ya tienes cuenta? Ir a login '),
+            onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
           ),
           SizedBox(
             height: 100.0,
@@ -173,7 +172,7 @@ class LoginPage extends StatelessWidget {
         stream: bloc.formValiStream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return ElevatedButton(
-            onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
+            onPressed: snapshot.hasData ? () => _register(bloc, context) : null,
             style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -186,7 +185,7 @@ class LoginPage extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
               child: Text(
-                'Ingresar',
+                'Registrar',
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -194,9 +193,9 @@ class LoginPage extends StatelessWidget {
         });
   }
 
-  _login(LoginBloc bloc, BuildContext context) {
-    usuarioProvider.login(bloc.email, bloc.password);
+  _register(LoginBloc bloc, BuildContext context) {
+    usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
 
-    //Navigator.pushReplacementNamed(context, 'home');
+    // Navigator.pushReplacementNamed(context, 'home');
   }
 }
