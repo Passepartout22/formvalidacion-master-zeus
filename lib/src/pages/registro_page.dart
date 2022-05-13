@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formvalidacion/src/blocs/provider.dart';
 import 'package:formvalidacion/src/providers/usuario_provider.dart';
+import 'package:formvalidacion/src/utils/utils.dart';
 
 class RegistroPage extends StatelessWidget {
   final usuarioProvider = UsuarioProvider();
@@ -193,9 +194,13 @@ class RegistroPage extends StatelessWidget {
         });
   }
 
-  _register(LoginBloc bloc, BuildContext context) {
-    usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
+  _register(LoginBloc bloc, BuildContext context) async {
+    final info = await usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
 
-    // Navigator.pushReplacementNamed(context, 'home');
+    if (info['ok']) {
+      Navigator.pushReplacementNamed(context, 'home');
+    } else {
+      mostrarAlerta(context, 'use los datos correctos o cree una cuenta');
+    }
   }
 }

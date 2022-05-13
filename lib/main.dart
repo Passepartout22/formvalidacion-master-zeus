@@ -15,6 +15,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final prefs = PreferenciasUsuario();
+    print(prefs.token);
+
     return Provider(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
